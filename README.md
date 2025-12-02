@@ -91,9 +91,31 @@ env_file:
 
 ### 3. 本地开发（不使用 Docker）
 
+#### 方式一：使用提供的脚本（推荐）
+
 ```bash
-# 创建虚拟环境（推荐）
+# 赋予执行权限（首次运行）
+chmod +x run_local.sh
+
+# 运行脚本（会自动创建虚拟环境、安装依赖、运行爬虫）
+./run_local.sh
+```
+
+脚本会自动：
+- 创建虚拟环境（如果不存在）
+- 激活虚拟环境
+- 安装依赖
+- 安装 Playwright 浏览器
+- 检查 MongoDB 连接
+- 运行爬虫
+
+#### 方式二：手动运行
+
+```bash
+# 创建虚拟环境（如果不存在）
 python3 -m venv venv
+
+# 激活虚拟环境
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # 安装依赖
@@ -115,12 +137,9 @@ export MAX_PAGES=2
 scrapy crawl google_search
 ```
 
-或者使用提供的脚本：
-
-```bash
-chmod +x run_local.sh
-./run_local.sh
-```
+**重要提示**：
+- 必须激活虚拟环境后再运行 `scrapy crawl google_search`
+- 脚本会自动使用虚拟环境中的 Python 和依赖
 
 ## 配置说明
 
