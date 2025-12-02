@@ -33,7 +33,7 @@ services:
       - MONGO_DATABASE=google_search
       - MONGO_COLLECTION=results
       - SEARCH_QUERY=python scrapy
-      - MAX_PAGES=1
+      - MAX_PAGES=2
     networks:
       - spider_network
     volumes:

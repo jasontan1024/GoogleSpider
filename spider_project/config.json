@@ -1,0 +1,61 @@
+{
+  "selectors": {
+    "result_container": {
+      "primary": [
+        "div.g",
+        "div[data-ved]",
+        "div.tF2Cxc",
+        "div[class*=\"g\"]"
+      ],
+      "description": "搜索结果容器选择器，按优先级排序。注意：div.g 不是唯一的，一页搜索结果通常有10个div.g容器，每个容器代表一个搜索结果（包含标题、链接、描述）。代码会查找所有div.g，然后遍历每个容器提取数据。"
+    },
+    "title": {
+      "selectors": [
+        "h3",
+        "h3 span",
+        "a h3"
+      ],
+      "description": "标题选择器，按优先级尝试。注意：所有选择器都在搜索结果容器（div.g）范围内查找，不会匹配到页面其他地方的h3标签"
+    },
+    "url": {
+      "selectors": [
+        "h3.closest('a')",
+        "a[href^='/url?q=']",
+        "a[href^='http']"
+      ],
+      "description": "URL链接选择器，按优先级尝试。优先从标题元素向上查找包含它的a标签（最准确，避免匹配到导航链接），如果失败则查找以/url?q=开头的链接（Google重定向链接），最后查找http开头的链接（备用方案，会自动过滤掉'更多'、'相关'等非搜索结果链接）"
+    },
+    "description": {
+      "selectors": [
+        "div.VwiC3b",
+        "div.s span.st",
+        "span.st",
+        "div[data-sncf]"
+      ],
+      "description": "描述选择器，按优先级尝试。注意：所有选择器都在搜索结果容器（div.g）范围内查找，不会匹配到页面其他地方的描述元素"
+    },
+    "next_page": {
+      "selectors": [
+        "a#pnnext",
+        "a[aria-label*=\"Next\"]",
+        "a[aria-label*=\"next\"]",
+        "a[id*=\"next\"]"
+      ],
+      "description": "下一页按钮选择器，按优先级尝试"
+    }
+  },
+  "extraction": {
+    "url_redirect_prefix": "/url?q=",
+    "base_url": "https://www.google.com",
+    "description": "URL处理配置"
+  },
+  "validation": {
+    "captcha_indicators": [
+      "recaptcha",
+      "captcha-form",
+      "unusual traffic from your computer"
+    ],
+    "description": "验证码检测关键词"
+  }
+}
+
